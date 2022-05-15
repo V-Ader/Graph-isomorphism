@@ -1,6 +1,9 @@
 #include <iostream>
-#include "node.hpp"
+#include "graph.hpp"
 
 int main(){
-    std::cout << "Hello World" << std::endl;
+
+    Graph g1 = Graph(10);
+
+    std::cout << g1.getSize() << std::endl;
 }

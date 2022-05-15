@@ -9,7 +9,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 set(SOURCES
     src/main.cpp
-    src/node.cpp
+    src/graph.cpp
 )
 
 # add the executable
