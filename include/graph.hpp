@@ -4,16 +4,23 @@ class Graph
 {
 private:
     int size;
-    int** body;
+    int* body;
 
 public:
     Graph();
-    Graph(int);
+    Graph(int size, bool setRandom=true);
+    Graph(const Graph &g);
 
-    int getConnection(int n, int m) const { return this->body[n][m]; }
+    void printGraph();
+
+    int getConnection(int n, int m) const { return this->body[n*this->size + m]; }    
+    int getConnection(int k) const { return this->body[k]; }
+
     int getSize() const { return this->size; }
 
-    void setConnection(int n, int m, int val) { this->body[n][m] = val; }
+    void setConnection(int n, int m, int val) { this->body[n*this->size + m] = val; }
+
+    bool operator==(const Graph& g);
 
 
     ~Graph();

@@ -3,7 +3,15 @@
 
 int main(){
 
-    Graph g1 = Graph(10);
+    Graph g1 = Graph(5);
+    Graph g2 = g1;
 
-    std::cout << g1.getSize() << std::endl;
+    g2.setConnection(1, 1, 2);
+
+    g1.printGraph();
+
+    g2.printGraph();
+
+
+
 }
