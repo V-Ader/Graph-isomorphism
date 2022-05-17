@@ -60,28 +60,4 @@ int main(){
     if(ans){
         std::cout << "ok" << std::endl;
     }
-
-    
-
-
-
-
-    // #pragma omp parallel num_threads(4) private(permutation) shared(ids)
-    // {
-    //     #pragma omp for
-    //     for(int k = 0; k < fatorial(ids.size()); ++k){
-    //         permutation = nth_permutation(ids, k);
-
-    //         Graph g3 = g2;
-
-    //         for(int i = 0; i < N; ++i){
-    //             for(int j = 0; j < N; ++j){
-    //                 g3.setConnection(permutation.at(i), permutation.at(j), g2.getConnection(i, j));
-    //             }
-    //         }
-
-
-            
-    //     }
-    // }
 }
