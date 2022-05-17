@@ -1,7 +1,11 @@
-#include "graph.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <iostream>
+#include <vector>
+
+#include "graph.hpp"
+#include "utils.hpp"
+
 
 Graph::Graph()
 {
@@ -48,6 +52,7 @@ void Graph::printGraph()
     }
 
     std::cout << std::endl;
+    std::cout << std::endl;
 }
 
 bool Graph::operator==(const Graph &g)
@@ -59,6 +64,72 @@ bool Graph::operator==(const Graph &g)
     }
 
     return true;
+}
+
+bool Graph::isIsomorfic(Graph& g) {
+    std::vector<int> ids;
+    std::vector<int> permutation;
+
+    for(int i = 0; i < g.getSize(); ++i){
+        ids.push_back(i);
+    }
+
+    bool isomorfism = false;
+
+    for(int k = 0; k < fatorial(ids.size()); ++k){
+        permutation = nth_permutation(ids, k);
+
+        Graph g3 = g;
+
+        for(int i = 0; i < g.getSize(); ++i){
+            for(int j = 0; j < g.getSize(); ++j){
+                g3.setConnection(permutation.at(i), permutation.at(j), g.getConnection(i, j));
+   
+            }
+        }
+
+        if( g3 == *this ){
+            isomorfism = true;
+        }
+    }
+
+    return isomorfism;
+}
+
+bool Graph::isIsomorficParallel(Graph& g) {
+
+
+    bool isomorfism = false;
+    std::vector<int> ids;
+
+    for(int i = 0; i < g.getSize(); ++i){
+        ids.push_back(i);
+    }
+
+    #pragma omp parallel num_threads(8)
+    { 
+    std::vector<int> permutation;
+
+    #pragma omp for
+    for(int k = 0; k < fatorial(ids.size()); ++k){
+        permutation = nth_permutation(ids, k);
+
+        Graph g3 = g;
+
+        for(int i = 0; i < g.getSize(); ++i){
+            for(int j = 0; j < g.getSize(); ++j){
+                g3.setConnection(permutation.at(i), permutation.at(j), g.getConnection(i, j));
+   
+            }
+        }
+
+        if( g3 == *this ){
+            isomorfism = true;
+        }
+    }
+    }
+
+    return isomorfism;
 }
 
 Graph::~Graph()

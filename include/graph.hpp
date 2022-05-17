@@ -21,6 +21,8 @@ public:
     void setConnection(int n, int m, int val) { this->body[n*this->size + m] = val; }
 
     bool operator==(const Graph& g);
+    bool isIsomorfic(Graph& g);
+    bool isIsomorficParallel(Graph& g);
 
 
     ~Graph();
