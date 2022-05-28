@@ -11,8 +11,8 @@ Graph::Graph()
 {
 }
 
-Graph::Graph(int size, bool setRandom)
-: size(size)
+Graph::Graph(int size, int threads_avaible, bool setRandom)
+: size(size), threads_avaible(threads_avaible)
 {
     srand(time(NULL));
     this->body = new int[size*size];
@@ -35,6 +35,7 @@ Graph::Graph(int size, bool setRandom)
 
 Graph::Graph(const Graph &g){
     this->size = g.size;
+    this->threads_avaible = g.threads_avaible;
     this->body = new int[this->size*this->size];
 
     for(int i = 0; i < this->size * this->size; ++i){
@@ -106,7 +107,7 @@ bool Graph::isIsomorficParallel(Graph& g) {
         ids.push_back(i);
     }
 
-    #pragma omp parallel num_threads(8)
+    #pragma omp parallel num_threads(this->threads_avaible)
     { 
     std::vector<int> permutation;
 

@@ -5,10 +5,11 @@ class Graph
 private:
     int size;
     int* body;
+    int threads_avaible;
 
 public:
     Graph();
-    Graph(int size, bool setRandom=true);
+    Graph(int size, int threads_avaible, bool setRandom=true);
     Graph(const Graph &g);
 
     void printGraph();
